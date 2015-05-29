@@ -1,0 +1,47 @@
+dependencies {
+    compile project(':data:model') 
+	
+  	compile     "org.springframework:spring-context:$springVersion"
+    compile     libraries.logging
+    compile     libraries.jpa2
+
+	
+    runtime     libraries.hibernate
+	
+	  testCompile "org.springframework:spring-test:$springVersion"
+	
+	  testRuntime "org.springframework:spring-jdbc:$springVersion"
+	  testRuntime "org.springframework:spring-orm:$springVersion"
+	  testRuntime "org.hibernate:hibernate-core:$hibernateVersion"
+    testRuntime	"org.hibernate:hibernate-entitymanager:$hibernateVersion" 
+    testRuntime libraries.hsqldb
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java 
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+ }
+ 
+//sourceSets {
+//	main {
+//		resources {
+//			srcDir 'src/main/config'
+//		}
+//	}
+//}
+ 
+ task testJar(type: Jar){
+    classifier = 'tests'
+    from sourceSets.test.output
+ }
+ 
+ artifacts{
+  archives testJar
+ }
+ 

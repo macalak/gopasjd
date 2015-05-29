@@ -1,0 +1,23 @@
+dependencies {
+    compile project(':data:access') 
+	
+	compile "org.springframework:spring-tx:$springVersion"
+	
+	testCompile "org.springframework:spring-test:$springVersion"
+	testRuntime "org.springframework:spring-jdbc:$springVersion"
+	testRuntime "org.springframework:spring-orm:$springVersion"
+	testRuntime "org.hibernate:hibernate-core:$hibernateVersion"
+	testRuntime	"org.hibernate:hibernate-entitymanager:$hibernateVersion"
+	testRuntime libraries.hsqldb
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java 
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+ }

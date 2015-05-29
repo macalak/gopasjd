@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="../template/template.xhtml">
+	<ui:define name="content">
+		<h3>Borrowing</h3>
+		<h:panelGroup style="width:100%;">
+			<h4>Book selection</h4>
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputLabel for="isbnInput" value="Book ISBN :" />
+					<h:inputText id="isbnInput"
+						value="#{borrowingController.selectedBookIsbn}" size="32" />
+					<h:commandButton value="Borrow"
+						action="#{borrowingController.borrowBook()}" />
+				</h:panelGrid>
+			</h:form>
+			<h4>Actual borrowings</h4>
+			<h:panelGrid columns="1" style="width:100%;">
+				<h:dataTable value="#{borrowingController.bookBorrowings}" var="book"
+					styleClass="book-table" headerClass="book-table-header"
+					rowClasses="book-table-odd-row,book-table-even-row">
+					<h:column>
+						<!-- column header -->
+						<f:facet name="header">ISBN</f:facet>
+						<!-- row record -->
+    						#{book.isbn}
+   						</h:column>
+
+					<h:column>
+						<f:facet name="header">Title</f:facet>
+    						#{book.title}
+    					</h:column>
+
+					<h:column>
+						<f:facet name="header">Author</f:facet>
+    						#{book.author}
+    					</h:column>
+				</h:dataTable>
+			</h:panelGrid>
+			<h:form>
+				<h:panelGrid columns="2" style="border:none;">
+					<h:commandButton value="Check out"
+						action="#{borrowingController.checkOutBorrowing()}" />
+					<h:commandButton value="Cancel"
+						action="#{borrowingController.cancelBorrowing()}" />
+				</h:panelGrid>
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+</html>

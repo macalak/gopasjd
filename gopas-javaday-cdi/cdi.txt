@@ -1,0 +1,48 @@
+1. Make DAO CDI beans instead of EJBs
+ a) Remove Local from BookRepository interface
+ b) Remove @Stateless from JpaBookRepository bean
+ c) Replace TransactionAttribute with Transactional in JpaBookRepository 
+ 
+ d) Remove @Singleton from InMemoryBookRepository
+ e) Add @ApplicationScoped annotation
+ f) Turn books Map into Synchronized one
+ g) Add @Vetoed annotation to disable InMemoryBookRepository bean 
+ h) Replace @EJB with @Inject in service layer (BorrowingServiceBean, LibraryAdminServiceBean, LibraryServiceBean)
+ i) Replace @EJB with @Inject in web layer (BorrowingController)
+ 
+2. Enable InMemoryBookRepository and use of @Qualifier
+ a) Remove @Vetoed annotation from InMemoryBookRepository
+    Try to deploy and check the error: 
+    org.jboss.weld.exceptions.DeploymentException: WELD-001409: Ambiguous dependencies for type BookRepository with qualifiers @Default
+ b) Mark JpaBookRepository with @JpaRepository qualifier annotation
+ c) Mark all injection points (beans where the JPA implementation of BookRepository should be injected) wit same @JpaRepository annotation
+ 
+ 3. Enable @Alternative-s
+  a) Annotate InMemoryBookRepository and JpaBookRepository with @Alternative annotation
+     Now the bean are disabled for injection and one of the alternative must be enabled in beans.xml
+     If InMemoryBookRepository, @JpaRepository qualifier should not be used
+     
+ 4. @Produces logger
+  a) In order to inject LOGGER, just use @Inject 
+  
+ 5. @Interceptor binding
+ 
+  a) Remove @Interceptors from LibraryServiceBean
+  b) Add @Monitor annotation on LibraryServiceBean, which binds the MonitorInterceptor to bean
+  c) Enable interceptors using @Priority annotation or, <interceptors> in beans.xml
+  
+ 5. @Decorator
+  a) Enable SynchronizedRepository by adding @Priority annotation or, <decorators> in beans.xml
+ 
+ 6. @Stereotype
+  a) Turn Service EJBs into CDIs, use @Service stereotype.
+     @Servive adds Transactions and Monitor
+     
+7. @Scope*
+  a) Turn JSF managed beans into CDI beans using @Named annotation
+  b) Use javax.enterprise.context.RequestScoped	, or javax.enterprise.context.SessionScoped
+  c) Use @Inject instead @EJB     
+         
+         
+  	 
+ 

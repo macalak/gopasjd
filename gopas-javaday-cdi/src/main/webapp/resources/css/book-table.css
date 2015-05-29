@@ -1,0 +1,23 @@
+.book-table{   
+	border-collapse:collapse;
+	width:100%;
+    margin: 10px 0px;
+}
+ 
+.book-table-header{
+	text-align:center;
+	color: white;
+	background:none repeat scroll 0 0 #604b42;
+	border-bottom:1px solid #BBBBBB;
+	padding:16px;
+}
+ 
+.book-table-odd-row{
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border-top:1px solid #BBBBBB;
+}
+ 
+.book-table-even-row{
+	background:none repeat scroll 0 0 #dbd7d5;
+	border-top:1px solid #BBBBBB;
+}

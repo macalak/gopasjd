@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+		<h:outputStylesheet library="css" name="librarymaster.css"  />
+		<h:outputStylesheet library="css" name="book-table.css"  />
+		<title>Library Master Home</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </h:head>
+
+	<h:body>
+		<div id="main_wrapper">
+	    	<div id="header"><h:graphicImage library="images" name="librarymaster-banner.png"/></div>
+	    	<ui:include src="menu.xhtml"/>
+	    	<br/>
+    		<ui:insert name="content"/>
+   			<ui:include src="footer.xhtml"/>
+   		</div>
+	</h:body>    
+
+</html>  

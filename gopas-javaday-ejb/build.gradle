@@ -1,0 +1,34 @@
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+
+ext.libraries = [
+    javaee:   'javax:javaee-api:7.0',
+    logging: [
+         'org.slf4j:slf4j-api:1.7.5',
+         'org.slf4j:slf4j-log4j12:1.7.5',
+         'log4j:log4j:1.2.15'
+    ],
+    junit:  'junit:junit:4.11'
+]
+
+// Override default buildDir to not conflict with Eclipse build directory
+buildDir="build_gradle"
+
+allprojects {
+    repositories {
+        maven { url "$localrepo_url"  }
+        maven { url "$artifactory_url" }
+        mavenCentral()
+    }
+}
+
+dependencies {
+    compile libraries.logging
+    providedCompile  libraries.javaee
+    testCompile libraries.junit
+}
+
+task generateWrapper(type: Wrapper) {
+	gradleVersion = '2.4'
+}

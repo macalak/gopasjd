@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<ui:composition template="../template/template.xhtml">
+	<ui:define name="content">
+		<h3>Add Book</h3>
+		<h:form>
+			<h:panelGrid columns="3" style="width:100%;">
+			
+ 				<h:outputLabel for ="bookTitle" value="Title :"/>	
+				<h:inputText id="bookTitle" value="#{addBookController.book.title}" size="32"/>
+				<h:message for="bookTitle" style="color:red" />
+				
+				<h:outputLabel for ="bookAuthor" value="Author :"/>	
+				<h:inputText id="bookAuthor" value="#{addBookController.book.author}" size="32"/>
+				<h:message for="bookAuthor" style="color:red" />
+
+				<h:outputLabel for ="bookPublisher" value="Publisher :"/>	
+				<h:inputText id="bookPublisher" value="#{addBookController.book.publisher}" size="32"/>
+				<h:message for="bookPublisher" style="color:red" />
+
+				<h:outputLabel for ="bookCatId" value="Cat ID :"/>	
+				<h:inputText id="bookCatId" value="#{addBookController.book.catId}" size="32"/>
+				<h:message for="bookCatId" style="color:red" />
+
+				<h:outputLabel for ="bookIsbn" value="ISBN :"/>	
+				<h:inputText id="bookIsbn" value="#{addBookController.book.isbn}" size="32"/>
+				<h:message for="bookIsbn" style="color:red" />
+
+				<h:outputLabel for ="bookGenre" value="Genre :"/>	
+				<h:selectOneMenu id ="bookGenre" value="#{addBookController.book.genre}">
+					<f:selectItems value="#{enumValuesProvider.bookGenres}"
+                               var="genre"
+                               itemValue="#{genre}"
+                               itemLabel="#{genre.name()}" />
+				</h:selectOneMenu>
+				<h:message for="bookGenre" style="color:red" />
+				
+                <h:outputLabel for ="bookAvailability" value="Availability :"/>	
+				<h:inputText id="bookAvailability" value="#{addBookController.book.availability}" disabled="true"/>
+				<h:message for="bookAvailability" style="color:red" />
+				
+				<h:outputText/>
+        		<h:outputText/>
+				<h:commandButton value="Add" action="#{addBookController.add}" />
+					
+ 			</h:panelGrid>
+ 
+			
+		</h:form>
+	
+	</ui:define>
+	</ui:composition>
+
+</html>
